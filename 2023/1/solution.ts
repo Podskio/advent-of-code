@@ -4,7 +4,7 @@ const lines = input.split("\n");
 let p1Total = 0;
 let p2Total = 0;
 
-for (let line of lines) {
+for (const line of lines) {
   let firstDigit = "";
   let lastDigit = "";
 
