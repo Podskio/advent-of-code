@@ -11,7 +11,7 @@ for (const line of lines) {
   for (let i = 0; i <= line.length; i++) {
     let num = "";
 
-    if (Number(line.charAt(i))) {
+    if (parseInt(line.charAt(i))) {
       num = line.charAt(i);
     }
 
@@ -44,7 +44,7 @@ for (let line of lines) {
   for (let i = 0; i <= line.length; i++) {
     let num = "";
 
-    if (Number(line.charAt(i))) {
+    if (parseInt(line.charAt(i))) {
       num = line.charAt(i);
     }
 
