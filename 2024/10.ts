@@ -6,7 +6,6 @@ const grid = lines.map((l) => l.split("").map(Number));
 type Coords = [number, number];
 
 const trailheads: Coords[] = [];
-const endpoints: Coords[] = [];
 
 let scores = 0;
 let ratings = 0;
@@ -53,11 +52,9 @@ const findPathsToEnd = (
   );
 };
 
-// Find trailheads and endpoints
 for (let y = 0; y < grid.length; y++) {
   for (let x = 0; x < grid[y].length; x++) {
     if (grid[y][x] === 0) trailheads.push([x, y]);
-    if (grid[y][x] === 9) endpoints.push([x, y]);
   }
 }
 
