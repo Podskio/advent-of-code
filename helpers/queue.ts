@@ -45,7 +45,7 @@ export class PriorityQueue<T> {
 
   constructor(values?: [T, number][]) {
     this.queue = values ?? [];
-    this.queue.sort((a, b) => b[1] - a[1]);
+    this.queue.sort((a, b) => a[1] - b[1]);
   }
 
   *[Symbol.iterator]() {
@@ -64,7 +64,7 @@ export class PriorityQueue<T> {
 
   push(value: T, priority: number) {
     this.queue.push([value, priority]);
-    this.queue.sort((a, b) => b[1] - a[1]);
+    this.queue.sort((a, b) => a[1] - b[1]);
   }
 
   pop(): T | undefined {
