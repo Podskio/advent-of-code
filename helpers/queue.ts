@@ -50,25 +50,39 @@ export class PriorityQueue<T> {
 
   *[Symbol.iterator]() {
     for (const v of this.queue) {
-      yield v[0];
+      yield v;
     }
   }
 
-  front(): T {
-    return this.queue[0][0];
+  private _sort() {
+    this.queue.sort((a, b) => a[1] - b[1]);
   }
 
-  back(): T {
-    return this.queue[this.queue.length - 1][0];
+  front(): [T, number] {
+    return this.queue[0];
+  }
+
+  back(): [T, number] {
+    return this.queue[this.queue.length - 1];
+  }
+
+  get(value: T): [T, number] | undefined {
+    return this.queue.find((v) => v[0] === value);
   }
 
   push(value: T, priority: number) {
     this.queue.push([value, priority]);
-    this.queue.sort((a, b) => a[1] - b[1]);
+    this._sort();
   }
 
-  pop(): T | undefined {
-    return this.queue.shift()?.[0];
+  set(value: T, priority: number) {
+    const index = this.queue.findIndex((v) => v[0] === value);
+    if (index !== -1) this.queue[index][1] = priority;
+    this._sort();
+  }
+
+  pop(): [T, number] | undefined {
+    return this.queue.shift();
   }
 
   get size(): number {
