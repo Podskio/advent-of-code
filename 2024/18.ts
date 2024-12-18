@@ -34,7 +34,7 @@ while (low <= high) {
   else high = mid - 1;
 }
 
-const path = getPathForBytes(12);
+const path = getPathForBytes(1024);
 part1 = path ? path.length - 1 : 0;
 part2 = lines[high];
 
