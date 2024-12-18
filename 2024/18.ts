@@ -15,28 +15,13 @@ const end = Coords.toString([size, size]);
 
 const getPathForBytes = (bytes: number) => {
   const grid = Grid.fromValue(size + 1, size + 1, ".");
-  const graph = new Graph<string>();
 
   for (const line of lines.slice(0, bytes)) {
     const [x, y] = line.split(",").map(Number);
     grid.set([x, y], "#");
   }
 
-  for (const [x, y, value] of grid) {
-    if (value === "#") continue;
-
-    const neighbors = grid
-      .neighbors([x, y])
-      .filter(([, , value]) => value !== "#");
-
-    const from = Coords.toString([x, y]);
-    for (const [nx, ny] of neighbors) {
-      const to = Coords.toString([nx, ny]);
-      graph.addEdges([[from, to]]);
-    }
-  }
-
-  return graph.dijkstra(start, [end]);
+  return Graph.fromGrid(grid, ["#"]).dijkstra(start, [end]);
 };
 
 let low = 0;

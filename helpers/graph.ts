@@ -1,3 +1,5 @@
+import { Coords, Grid } from "./grid.ts";
+
 import { PriorityQueue } from "./queue.ts";
 
 export class Graph<T> {
@@ -7,6 +9,26 @@ export class Graph<T> {
   constructor() {
     this.nodes = new Set();
     this.adjacencyList = new Map();
+  }
+
+  static fromGrid(grid: Grid<string>, exclusions: string[]): Graph<string> {
+    const graph = new Graph<string>();
+
+    for (const [x, y, value] of grid) {
+      if (exclusions.includes(value)) continue;
+
+      const neighbors = grid
+        .neighbors([x, y])
+        .filter(([, , value]) => !exclusions.includes(value));
+
+      const from = Coords.toString([x, y]);
+      for (const [nx, ny] of neighbors) {
+        const to = Coords.toString([nx, ny]);
+        graph.addEdges([[from, to]]);
+      }
+    }
+
+    return graph;
   }
 
   addEdges(edges: [T, T, number?][], directed = true) {
