@@ -49,6 +49,14 @@ export class Grid<T> {
     return new Grid(str.split("\n").map((row) => row.split("")));
   }
 
+  static fromValue<T>(rows: number, cols: number, value: T): Grid<T> {
+    return new Grid(
+      Array.from({ length: cols }, () =>
+        Array.from({ length: rows }, () => value)
+      )
+    );
+  }
+
   *[Symbol.iterator]() {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
