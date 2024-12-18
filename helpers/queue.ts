@@ -39,3 +39,47 @@ export class Queue<T> {
     this.queue = [];
   }
 }
+
+export class PriorityQueue<T> {
+  private queue: [T, number][];
+
+  constructor(values?: [T, number][]) {
+    this.queue = values ?? [];
+    this.queue.sort((a, b) => b[1] - a[1]);
+  }
+
+  *[Symbol.iterator]() {
+    for (const v of this.queue) {
+      yield v[0];
+    }
+  }
+
+  front(): T {
+    return this.queue[0][0];
+  }
+
+  back(): T {
+    return this.queue[this.queue.length - 1][0];
+  }
+
+  push(value: T, priority: number) {
+    this.queue.push([value, priority]);
+    this.queue.sort((a, b) => b[1] - a[1]);
+  }
+
+  pop(): T | undefined {
+    return this.queue.shift()?.[0];
+  }
+
+  get size(): number {
+    return this.queue.length;
+  }
+
+  empty(): boolean {
+    return this.queue.length === 0;
+  }
+
+  clear() {
+    this.queue = [];
+  }
+}
