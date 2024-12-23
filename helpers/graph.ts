@@ -3,7 +3,7 @@ import { Coords, Grid } from "./grid.ts";
 import { PriorityQueue } from "./queue.ts";
 
 export class Graph<T> {
-  private nodes: Set<T>;
+  readonly nodes: Set<T>;
   private adjacencyList: Map<T, Map<T, number>>;
 
   constructor() {
@@ -46,8 +46,8 @@ export class Graph<T> {
     }
   }
 
-  neighbors(node: T): Map<T, number> | undefined {
-    return this.adjacencyList.get(node);
+  neighbors(node: T): Map<T, number> {
+    return this.adjacencyList.get(node) ?? new Map<T, number>();
   }
 
   dijkstra(start: T, end: T[]): T[] | undefined {
@@ -74,10 +74,7 @@ export class Graph<T> {
         return path.reverse();
       }
 
-      const neighbors = this.neighbors(node)!;
-      if (!neighbors) continue;
-
-      for (const [neighbor, nWeight] of neighbors) {
+      for (const [neighbor, nWeight] of this.neighbors(node)) {
         const nPriority = queue.get(neighbor)?.[1];
 
         if (nPriority && nPriority > weight + nWeight) {
