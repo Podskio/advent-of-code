@@ -1,3 +1,5 @@
+import { Coords } from "./grid.ts";
+
 export type DirectionType = [-1 | 0 | 1, -1 | 0 | 1];
 
 const directionChars = [
@@ -57,7 +59,7 @@ export class Direction {
   }
 
   static toArrow(direction: DirectionType): DirectionChar {
-    const index = cardDirections.indexOf(direction);
+    const index = cardDirections.findIndex((d) => Coords.equals(d, direction));
     switch (index) {
       case 0:
         return "^";

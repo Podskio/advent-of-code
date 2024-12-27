@@ -27,6 +27,10 @@ export class Queue<T> {
     return this.queue.shift();
   }
 
+  popBack(): T | undefined {
+    return this.queue.pop();
+  }
+
   get size(): number {
     return this.queue.length;
   }

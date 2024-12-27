@@ -69,6 +69,14 @@ export class Grid<T> {
     return this.data[coords[1]][coords[0]];
   }
 
+  row(y: number): T[] {
+    return this.data[y];
+  }
+
+  col(x: number): T[] {
+    return this.data.map((row) => row[x]);
+  }
+
   set(coords: CoordsType, value: T) {
     this.data[coords[1]][coords[0]] = value;
   }
