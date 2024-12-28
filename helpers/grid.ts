@@ -11,6 +11,16 @@ export class Coords {
     return [a[0] - b[0], a[1] - b[1]];
   }
 
+  static mul(a: CoordsType, b: CoordsType | number): CoordsType {
+    if (typeof b === "number") return [a[0] * b, a[1] * b];
+    return [a[0] * b[0], a[1] * b[1]];
+  }
+
+  static div(a: CoordsType, b: CoordsType | number): CoordsType {
+    if (typeof b === "number") return [a[0] / b, a[1] / b];
+    return [a[0] / b[0], a[1] / b[1]];
+  }
+
   static equals(a: CoordsType, b: CoordsType): boolean {
     return a[0] === b[0] && a[1] === b[1];
   }
@@ -55,6 +65,10 @@ export class Grid<T> {
         Array.from({ length: rows }, () => value)
       )
     );
+  }
+
+  clone(): Grid<T> {
+    return new Grid(this.data.map((row) => [...row]));
   }
 
   *[Symbol.iterator]() {
