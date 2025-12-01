@@ -1,5 +1,7 @@
 {
   "deno.enable": true,
   "deno.lint": true,
-  "deno.unstable": true
+  "github.copilot.enable": {
+    "typescript": false
+  }
 }
