@@ -16,6 +16,14 @@ export const cardDirections: DirectionType[] = [
   [-1, 0],
 ];
 
+export const allDirections: DirectionType[] = [
+  ...cardDirections,
+  [-1, -1],
+  [1, 1],
+  [1, -1],
+  [-1, 1],
+];
+
 export class Direction {
   static left(direction: DirectionType): DirectionType {
     const index = cardDirections.indexOf(direction);
@@ -32,7 +40,7 @@ export class Direction {
   static opposite(direction: DirectionType): DirectionType {
     const index = cardDirections.indexOf(direction);
     const newIndex = (index + 2) % cardDirections.length;
-    return cardDirections[newIndex];  
+    return cardDirections[newIndex];
   }
 
   static fromChar(arrow: DirectionChar): DirectionType {

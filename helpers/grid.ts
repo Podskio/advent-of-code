@@ -1,4 +1,4 @@
-import { cardDirections } from "./directions.ts";
+import { allDirections, cardDirections } from "./directions.ts";
 
 export type CoordsType = [number, number];
 
@@ -216,6 +216,13 @@ export class Grid<T> {
 
   neighbors(coords: CoordsType): [...CoordsType, T][] {
     return cardDirections
+      .map((dir) => Coords.add(coords, dir))
+      .filter((coords) => this.inBounds(coords))
+      .map((coords) => [...coords, this.at(coords)]);
+  }
+
+  allNeighbors(coords: CoordsType): [...CoordsType, T][] {
+    return allDirections
       .map((dir) => Coords.add(coords, dir))
       .filter((coords) => this.inBounds(coords))
       .map((coords) => [...coords, this.at(coords)]);
